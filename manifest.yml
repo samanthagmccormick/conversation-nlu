@@ -1,5 +1,5 @@
 applications:
-- name: jk-conversation-simple
+- name: watson-conversation-with-natural-language-api
   command: npm start
   path: .
   memory: 256M
