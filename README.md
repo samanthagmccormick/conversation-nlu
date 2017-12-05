@@ -1,3 +1,18 @@
+The purpose of this fork is to prototype how to use the Watson Natural Language Understanding ("NLU") API with a Watson Conversations API workspace, in order to better understand the topics that the user is asking about, in order to better respond to their questions.
+
+It is a fork of https://github.com/joe4k/conversation-nlu with some differences:
+- It uses my own sandbox Watson Conversation workspace, which is cloned from a beta version of a chat bot.
+- It does not use the Cognitive Car workspace mentioned below, or the Weather Underground API
+- It sends visitor input to the NLU API for analysis, and the response data is printed to the browser page.
+- The response data I'm using from the NLU API is "entities", "keywords", and "categories".
+
+Watson Conversation API: https://console.bluemix.net/docs/services/conversation/getting-started.html
+Watson Natural Language Understanding API: https://console.bluemix.net/docs/services/natural-language-understanding/getting-started.html#getting-started-tutorial
+
+Original repo README is below.
+
+--------------------------------------------------------------------------------------------------------
+
 # Cognitive Car Dashboard Application powered by Conversation and NLU
 
 This application demonstrates how to integrate [Natural Language Understanding](https://www.ibm.com/watson/developercloud/natural-language-understanding.html) (NLU) service with [Watson Conversation](https://www.ibm.com/watson/developercloud/conversation.html) service to extract generic entities and pass those to the Conversation service.
@@ -85,8 +100,8 @@ To get the weather, we will rely on the [Weather Underground API](https://www.wu
 
 WEATHER_API_KEY=weatherapikey
 
-The last piece of information we need is the WORKSPACE_ID. 
-To get this, we need to create a workspace in our conversation service and build a conversation which involves defining intents, entities and building a dialog to orchestrate the interaction with the user. 
+The last piece of information we need is the WORKSPACE_ID.
+To get this, we need to create a workspace in our conversation service and build a conversation which involves defining intents, entities and building a dialog to orchestrate the interaction with the user.
 To do so:
   * Point your browser to http://bluemix.net
   * Login with your Bluemix credentials
