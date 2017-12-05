@@ -109,15 +109,27 @@ app.post('/api/message', function(req, res) {
     if (response != null) {
 
       if (response.entities != null) {
-        payload.context.naturallanguage_entities = response.entities;
+        // push entity "type" into the response naturallanguage_entities context
+        payload.context.naturallanguage_entities = '';
+        for (let entity of response.entities) {
+          payload.context.naturallanguage_entities += entity.type + ',';
+        }
       }
 
       if (response.categories != null) {
-        payload.context.naturallanguage_categories = response.categories;
+        // push category "label" into the response naturallanguage_categories context
+        payload.context.naturallanguage_categories = '';
+        for (let category of response.categories) {
+          payload.context.naturallanguage_categories += category.label + ',';
+        }
       }
 
       if (response.keywords != null) {
-        payload.context.naturallanguage_keywords = response.keywords;
+        // push keyword "text" into response naturallanguage_keywords context
+        payload.context.naturallanguage_keywords = '';
+        for (let keyword of response.keywords) {
+          payload.context.naturallanguage_keywords += keyword.text + ',';
+        }
       }
     }
 
@@ -139,28 +151,19 @@ function updateResponse(res, data) {
   // Print each category and relevance
   if (typeof data.context.naturallanguage_entities !== 'undefined' && data.context.naturallanguage_entities.length) {
     data.output.text += '<br /><strong>NLU API Entities:</strong><br />';
-
-    for (var i = 0; i < data.context.naturallanguage_entities.length; i++) {
-      data.output.text += data.context.naturallanguage_entities[i].label + ' (score: ' + data.context.naturallanguage_entities[i].score + '),<br />';
-    }
+    data.output.text += data.context.naturallanguage_entities + '<br />';
   }
 
   // Print each category and relevance
   if (typeof data.context.naturallanguage_keywords !== 'undefined' && data.context.naturallanguage_keywords.length) {
     data.output.text += '<br /><strong>NLU API Keywords:</strong><br />';
-
-    for (var i = 0; i < data.context.naturallanguage_keywords.length; i++) {
-      data.output.text += data.context.naturallanguage_keywords[i].text + ' (relevance: ' + data.context.naturallanguage_keywords[i].relevance + '),<br />';
-    }
+    data.output.text += data.context.naturallanguage_keywords + '<br />';
   }
 
   // Print each category and relevance
   if (typeof data.context.naturallanguage_categories !== 'undefined' && data.context.naturallanguage_categories.length) {
     data.output.text += '<br /><strong>NLU API Categories:</strong><br />';
-
-    for (var i = 0; i < data.context.naturallanguage_categories.length; i++) {
-      data.output.text += data.context.naturallanguage_categories[i].label + ' (score: ' + data.context.naturallanguage_categories[i].score + '),<br />';
-    }
+    data.output.text += data.context.naturallanguage_categories + '<br />';
   }
 
   return res.json(data);
